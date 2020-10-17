@@ -86,27 +86,33 @@ public class App {
                     
                 break;
                 case '2':
-
-                    for (int i = 0; i < polinomios.size(); i++) {
-                        System.out.println((i + 1) + ". " + polinomios.get(i));
-                    }
-
-                    String pol = JOptionPane.showInputDialog(null, "Ingrese la posicion del primer polinomio");
-                    int pol1 = Integer.parseInt(pol);
-                    
-
-                    String poli2 = JOptionPane.showInputDialog(null, "Ingrese la posicion del segundo polinomio");
-                    int pol2 = Integer.parseInt(poli2);
-
-                    // Resultado de la multiplicacion en un nuevo polinomio
-                    int gradoPolinomioProducto = polinomios.get(pol1 - 1).getGrado()
-                            + polinomios.get(pol2 - 1).getGrado();
-                    Pvf1 producto = new Pvf1(gradoPolinomioProducto);
-                    producto = polinomios.get(pol1 - 1).Multiplicar(polinomios.get(pol2 - 1));
-                    JOptionPane.showMessageDialog(null, "("+polinomios.get(pol1 - 1)+") ("+ polinomios.get(pol2 - 1) +") = " + producto, "Multiplicar Polinomios", 1);
-                    //System.out.println("El resultado de la multiplicación es: " + producto);
+                    if (polinomios.size() < 2) {
+                        JOptionPane.showMessageDialog(null, "No hay suficientes polinomios para operar");
+                    } else {
+                        for (int i = 0; i < polinomios.size(); i++) {
+                            System.out.println((i + 1) + ". " + polinomios.get(i));
+                        }
+    
+                        String pol = JOptionPane.showInputDialog(null, "Ingrese la posicion del primer polinomio");
+                        int pol1 = Integer.parseInt(pol);
+                        
+    
+                        String poli2 = JOptionPane.showInputDialog(null, "Ingrese la posicion del segundo polinomio");
+                        int pol2 = Integer.parseInt(poli2);
+    
+                        // Resultado de la multiplicacion en un nuevo polinomio
+                        int gradoPolinomioProducto = polinomios.get(pol1 - 1).getGrado()
+                                + polinomios.get(pol2 - 1).getGrado();
+                        Pvf1 producto = new Pvf1(gradoPolinomioProducto);
+                        producto = polinomios.get(pol1 - 1).Multiplicar(polinomios.get(pol2 - 1));
+                        JOptionPane.showMessageDialog(null, "("+polinomios.get(pol1 - 1)+") ("+ polinomios.get(pol2 - 1) +") = " + producto, "Multiplicar Polinomios", 1);
+                        //System.out.println("El resultado de la multiplicación es: " + producto);
+                    } 
                 break;
                 case '3':
+                if (polinomios.size() < 1) {
+                    JOptionPane.showMessageDialog(null, "No hay ningun polinomio para derivar");
+                } else {
                     for (int i = 0; i < polinomios.size(); i++) {
                         System.out.println((i + 1) + ". " + polinomios.get(i));
                     }
@@ -121,23 +127,26 @@ public class App {
                     } else {
                         JOptionPane.showMessageDialog(null, "El resultado al derivar es: " + polinomios.get(polinomioDerivar - 1).Derivar(), "Derivar Polinomio", 1);
                     }
+                }
                     break;
                 default:
                 break;
             }
-        } while(opc != '3');
-        
-
+        } while(opc != '4');
     }
+
     public static char menu() {
         char opc;
         do {
-            opc = JOptionPane.showInputDialog(null, "\n" + "Elija una opción" + "\n\n").charAt(0);
-        } while (opc < '1' || opc > '3');
+            opc = JOptionPane.showInputDialog(null, "\n" + "Elija una opción" + "\n\n"
+                    + "[1] - Ingresar Polinomios" + "\n" + "[2] - Multiplicar Polinomios" + "\n" + "[3] - Derivar" + "\n" + "[4] - Salir" + "\n" + "\n")
+                    .charAt(0);
+        } while (opc < '1' || opc > '4');
 
         return opc;
         
     }
+
     public static ArrayList<String> split(String text) {
 
         Pattern pattern = Pattern.compile("(\\d+)([a-zA-Z]+)");
