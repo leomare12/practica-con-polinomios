@@ -126,9 +126,8 @@ public class App {
                 break;
             }
         } while(opc != '3');
-        
-
     }
+
     public static char menu() {
         char opc;
         do {
@@ -138,6 +137,7 @@ public class App {
         return opc;
         
     }
+
     public static ArrayList<String> split(String text) {
 
         Pattern pattern = Pattern.compile("(\\d+)([a-zA-Z]+)");
